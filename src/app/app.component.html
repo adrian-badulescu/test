@@ -1,29 +1,13 @@
 <div class="container-fluid">
-  <div class="row justify-content-center pt-2 pb-2 pl-2 pr-2">
-    <app-business1 class="pl-2 pr-2"></app-business1>
-    <app-business2 class="pl-2 pr-2"></app-business2>
-    <app-business3 class="pl-2 pr-2"></app-business3>
+  <div class="row">
+    <!-- <ul> -->
+      <div class="justify-content-center p-2" *ngFor="let business of data; trackBy: trackById;">       
+        <app-card  [data]="business"></app-card>
+      </div>
+    <!-- </ul> -->
+    
   </div>
-  <div class="row justify-content-center pb-2">
-    <app-business4 class="pl-2 pr-2"></app-business4>
-    <app-business5 class="pl-2 pr-2"></app-business5>
-    <app-business6 class="pl-2 pr-2"></app-business6>
-  </div>
-  <div class="row justify-content-center pb-2">
-    <app-business7 class="pl-2 pr-2"></app-business7>
-    <app-business8 class="pl-2 pr-2"></app-business8>
-    <app-business9 class="pl-2 pr-2"></app-business9>
-  </div>
-  <div class="row justify-content-center p-2">
-    <app-business10></app-business10>
-  </div>
-
-
-
   
 </div>
 
-
-
-
-<!-- <router-outlet></router-outlet> -->
+<router-outlet></router-outlet>
