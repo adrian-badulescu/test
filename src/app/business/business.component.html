@@ -1,1 +1,61 @@
-<p>business works!</p>
+<div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad ewoformcontent">
+
+    <div class="ui-grid ui-grid-responsive ui-fluid">
+        <div class="ui-grid-row">
+            <form  [formGroup]="form">
+
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="id" formControlName="id">
+                </div>
+
+           
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group">
+                            <label for="name">Nume</label>
+                            <input type="text" class="form-control" id="name" placeholder="" formControlName="name" [ngClass]="{'is-invalid': submitted && form.name.errors}">
+                            <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                                <span *ngIf="form.name.errors.required">Valoare obligatorie</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="" formControlName="email" [ngClass]="{'is-invalid': submitted && form.email.errors}">
+                            <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                                <span *ngIf="form.email.errors.required">Valoare obligatorie</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Data</label>
+                            <input type="date" class="form-control" id="date" placeholder="" formControlName="date" [ngClass]="{'is-invalid': submitted && form.date.errors}">
+                            <div *ngIf="submitted && form.date.errors" class="invalid-feedback">
+                                <span *ngIf="form.date.errors.required">Valoare obligatorie</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="active">Activ</label>
+                            <select class="form-control" name="active" id="active" formControlName="active" [ngClass]="{ 'is-invalid': submitted && form.active.errors}">
+                                <option value="">Alege status</option>
+                                <option *ngFor="let active of Active" [ngValue]="active">{{active}}</option>
+                            </select>
+                            <div *ngIf="submitted && form.active.errors" class="invalid-feedback">
+                                <span *ngIf="form.active.errors.required">Valoare obligatorie</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button class="btn-info" icon="fa fa-check" (click)="onSubmit(form.value)" label="Salveaza"></button>
+        </div>
+    </footer>
+</div>

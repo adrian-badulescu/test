@@ -12,7 +12,7 @@ export class CardComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router) {
-      this.route.params.subscribe( params => console.log(params) );
+      this.route.params.subscribe(params => console.log(params));
     }
 
   ngOnInit(): void {
