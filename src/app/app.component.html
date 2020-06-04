@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row mx-auto" style="max-width: 1200px;">
     <!-- <ul> -->
-      <div class="justify-content-center p-2" *ngFor="let business of data; trackBy: trackById;">       
-        <app-card  [data]="business"></app-card>
-      </div>
+    <div class="p-2" *ngFor="let business of data; trackBy: trackById;">
+      <app-card [data]="business"></app-card>
+    </div>
     <!-- </ul> -->
-    
+
   </div>
-  
+
 </div>
 
 <router-outlet></router-outlet>

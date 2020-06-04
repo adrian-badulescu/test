@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
+import { BusinessComponent } from './business/business.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
+    BusinessComponent,
 
   ],
   imports: [
