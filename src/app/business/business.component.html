@@ -1,8 +1,8 @@
-<div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad ewoformcontent">
+<div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad">
 
     <div class="ui-grid ui-grid-responsive ui-fluid">
         <div class="ui-grid-row">
-            <form  [formGroup]="form">
+            <form #form [formGroup]="form">
 
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="id" formControlName="id">
@@ -55,7 +55,7 @@
     </div>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button class="btn-info" icon="fa fa-check" (click)="onSubmit(form.value)" label="Salveaza"></button>
+            <button class="btn-info" icon="fa fa-check" (click)="onSubmit(table, form.value)" label="Salveaza">Salveaza</button>
         </div>
     </footer>
 </div>

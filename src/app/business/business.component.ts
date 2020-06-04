@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Service } from '../service.service';
 import { formCls } from './formModel';
 
@@ -13,10 +14,21 @@ export class BusinessComponent implements OnInit {
   item: formCls;
   list: Array<formCls>;
   Active: Array<string> = ['Da', 'Nu'];
-
-  constructor(private service: Service, public formBuilder: FormBuilder) {}
+  submitted: boolean;
+  id: number;
+  private subscription: any;
+  table: string;
+  constructor(
+    private service: Service,
+    public formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.subscription = this.route.params.subscribe((params) => {
+      this.id = parseInt(params['id']);
+    });
     this.form = this.formBuilder.group({
       id: [''],
       name: ['', [Validators.required]],
@@ -26,8 +38,13 @@ export class BusinessComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   onSubmit(table, values: formCls) {
-    values.id ? this.updateItem(table, values) : this.createItem(table, values);
+    // values.id ? this.updateItem(table, values) : this.createItem(table, values);
+    console.log(values);
   }
 
   createItem(table, data) {

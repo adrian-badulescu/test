@@ -11,8 +11,13 @@ import { environment } from "src/environments/environment";
   providedIn: 'root'
 })
 export class Service {
+  
   public entity: string;
+  public defaultView: boolean = true;
   private apiurl = environment.server.url + "/api";
+
+
+
   constructor(private httpClient: HttpClient) { }
 
   private httpOptions = {

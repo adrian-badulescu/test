@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { BusinessComponent } from './business/business.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { BusinessComponent } from './business/business.component';
     AppComponent,
     CardComponent,
     BusinessComponent,
+    NotfoundComponent,
 
   ],
   imports: [

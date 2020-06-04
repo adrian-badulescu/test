@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IData } from './Idata';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { IData } from './Idata';
+import { Service } from '../service.service';
 
 @Component({
   selector: 'app-card',
@@ -10,16 +11,14 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class CardComponent implements OnInit {
   @Input() data: IData;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router) {
-      this.route.params.subscribe(params => console.log(params));
-    }
+  constructor(private router: Router, private service: Service) {}
 
   ngOnInit(): void {
-    console.log(this.data.image);
+    // console.log(this.data.image);
   }
 
   goToBusiness(id) {
-    this.router.navigate(['/business', id])
+    this.service.defaultView = false;
+    this.router.navigate(['/business', id]);
   }
 }
