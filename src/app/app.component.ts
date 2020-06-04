@@ -17,8 +17,10 @@ export class AppComponent implements OnInit {
     this.defaultView = this.service.defaultView;
   }
 
-  ngOnInit() {}
-  title = 'app-test';
+  ngOnInit() {
+    console.log(this.data);
+  }
+ 
 
   setDefaultView(): boolean {
     return (this.defaultView = this.service.defaultView);

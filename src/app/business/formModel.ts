@@ -1,7 +1,9 @@
 export class formCls {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
+    phone: number;
     email: string;
     date: Date;
-    active: boolean;
+    active: number; // bool tiny int 
 }
