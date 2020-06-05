@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Service } from '../service.service';
 import { formCls } from './formModel';
+import { matcher } from './matcher';
 
 @Component({
   selector: 'app-business',
@@ -40,6 +41,8 @@ export class BusinessComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       acceptTerms: ['', Validators.required],
       date: ['', [Validators.required]],
+    }, {
+      validator: matcher('password', 'confirmPassword')
     });
   }
 
@@ -49,7 +52,7 @@ export class BusinessComponent implements OnInit {
 
   onSubmit(table, values: formCls) {
     this.submitted = true;
-    // values.id ? this.updateItem(table, values) : this.createItem(table, values);
+    values.id ? this.updateItem(table, values) : this.createItem(table, values);
     console.log(values);
   }
 
