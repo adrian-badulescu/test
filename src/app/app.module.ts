@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { BusinessComponent } from './business/business.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -15,15 +15,15 @@ import { NotfoundComponent } from './notfound/notfound.component';
     CardComponent,
     BusinessComponent,
     NotfoundComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

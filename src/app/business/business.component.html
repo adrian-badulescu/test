@@ -1,5 +1,7 @@
 <div class="card m-3">
-    <h5 class="card-header"></h5>
+    <h5 class="card-header">
+        <button (click)="goBack()" class="btn btn-primary">Inapoi</button>
+    </h5>
     <div class="card-body">
         <form [formGroup]="formValue" (ngSubmit)="onSubmit(formValue.value)">
             <div class="form-group">
@@ -8,14 +10,15 @@
 
             <div class="form-row">
                 <div class="form-group col">
-                    
+
 
                     <label>Apelativ</label>
-                    <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.title.errors }">
+                    <select formControlName="title" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.title.errors }">
                         <option value="">Alege</option>
                         <option value="Mr">Dnl</option>
                         <option value="Mrs">Dna</option>
-                        <option value="Miss">Dra</option>                        
+                        <option value="Miss">Dra</option>
                     </select>
                     <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
                         <div *ngIf="form.title.errors.required">Camp obligatoriu</div>
@@ -23,14 +26,16 @@
                 </div>
                 <div class="form-group col-5">
                     <label>Nume</label>
-                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.firstName.errors }" />
+                    <input type="text" formControlName="firstName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.firstName.errors }" />
                     <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
                         <div *ngIf="form.firstName.errors.required">Camp obligatoriu</div>
                     </div>
                 </div>
                 <div class="form-group col-5">
                     <label>Prenume</label>
-                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.lastName.errors }" />
+                    <input type="text" formControlName="lastName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.lastName.errors }" />
                     <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
                         <div *ngIf="form.lastName.errors.required">Camp obligatoriu</div>
                     </div>
@@ -39,7 +44,8 @@
             <div class="form row">
                 <div class="form-group col">
                     <label>Email</label>
-                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.email.errors }" />
+                    <input type="text" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.email.errors }" />
                     <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
                         <div *ngIf="form.email.errors.required">Camp Obligatoriu</div>
                         <div *ngIf="form.email.errors.email">Emailul trebuie sa fie o adresa valida</div>
@@ -58,7 +64,8 @@
             <div class="form-row">
                 <div class="form-group col">
                     <label>Parola</label>
-                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.password.errors }" />
+                    <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.password.errors }" />
                     <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
                         <div *ngIf="form.password.errors.required">Camp obligatoriu</div>
                         <div *ngIf="form.password.errors.minlength">Introdu o parola din minim 6 caractere</div>
@@ -66,7 +73,8 @@
                 </div>
                 <div class="form-group col">
                     <label>Confirma parola</label>
-                    <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.confirmPassword.errors }" />
+                    <input type="password" formControlName="confirmPassword" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form.confirmPassword.errors }" />
                     <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
                         <div *ngIf="form.confirmPassword.errors.required">Confirmarea parolei este necesara</div>
                         <div *ngIf="form.confirmPassword.errors.mustMatch">Parolele trebuie sa fie identice</div>
@@ -74,9 +82,11 @@
                 </div>
             </div>
             <div class="form-group form-check">
-                <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && form.acceptTerms.errors }" />
+                <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
+                    [ngClass]="{ 'is-invalid': submitted && form.acceptTerms.errors }" />
                 <label for="acceptTerms" class="form-check-label">Accepta Termeni & Conditii</label>
-                <div *ngIf="submitted && form.acceptTerms.errors" class="invalid-feedback">Acceptarea Termenilor si Conditiilor este obligatorie</div>
+                <div *ngIf="submitted && form.acceptTerms.errors" class="invalid-feedback">Acceptarea Termenilor si
+                    Conditiilor este obligatorie</div>
             </div>
             <div class="text-center">
                 <button class="btn btn-primary mr-1">Salveaza</button>
@@ -85,3 +95,26 @@
         </form>
     </div>
 </div>
+
+
+
+<p-table [value]="list">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Titlu</th>
+            <th>Prenume</th>
+            <th>Nume</th>
+            <th>Email</th>
+            <th>Data</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr>
+            <td>{{data.title}}</td>
+            <td>{{data.firstName}}</td>
+            <td>{{data.lastName}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.data}}</td>
+        </tr>
+    </ng-template>
+</p-table>

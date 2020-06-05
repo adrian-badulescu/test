@@ -4,7 +4,6 @@
         <div class="card-body">
           <h5 class="card-title">{{data.company}}</h5>
           <p class="card-text">{{data.description}}</p>
-          <a (click)=goToBusiness(data.id) class="btn btn-primary">Catre Business</a>
+          <a (click)="goToBusiness(data.id)" class="btn btn-primary">Catre Business</a>
         </div>
     </div>
-    <!-- [routerLink]="['/business', data.id]" -->

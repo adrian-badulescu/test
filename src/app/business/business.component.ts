@@ -34,6 +34,9 @@ export class BusinessComponent implements OnInit {
       console.log(this.id);
       this.createTable(this.id, this.table);
     });
+
+    this.getItems(this.entity);
+
     this.formValue = this.formBuilder.group(
       {
         id: [''],
@@ -61,6 +64,10 @@ export class BusinessComponent implements OnInit {
     this.submitted = true;
     values.id ? this.updateItem(values) : this.createItem(values);
     
+  }
+
+  getItems(entity) {
+    return this.service.findAllItemsEntity(entity)
   }
 
   createItem(data) {
@@ -92,6 +99,10 @@ export class BusinessComponent implements OnInit {
 
   createTable(id: number, table: string): string {
     return (this.entity = table.concat(id.toString()));
+  }
+
+  goBack() {
+    this.router.navigate(['/'])
   }
 
   onReset(): void {
