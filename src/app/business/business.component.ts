@@ -10,12 +10,13 @@ import { formCls } from './formModel';
   styleUrls: ['./business.component.css'],
 })
 export class BusinessComponent implements OnInit {
-  form: FormGroup;
+  formValue: FormGroup;
   item: formCls;
   list: Array<formCls>;
   Active: Array<string> = ['Da', 'Nu'];
   submitted: boolean;
   id: number;
+
   private subscription: any;
   table: string;
   constructor(
@@ -29,12 +30,16 @@ export class BusinessComponent implements OnInit {
     this.subscription = this.route.params.subscribe((params) => {
       this.id = parseInt(params['id']);
     });
-    this.form = this.formBuilder.group({
+    this.formValue = this.formBuilder.group({
       id: [''],
-      name: ['', [Validators.required]],
+      title: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      acceptTerms: ['', Validators.required],
       date: ['', [Validators.required]],
-      active: ['', [Validators.required]],
     });
   }
 
@@ -43,27 +48,37 @@ export class BusinessComponent implements OnInit {
   }
 
   onSubmit(table, values: formCls) {
+    this.submitted = true;
     // values.id ? this.updateItem(table, values) : this.createItem(table, values);
     console.log(values);
   }
 
   createItem(table, data) {
-    if (this.form.valid) {
+    if (this.formValue.valid) {
       this.service._createItemEntity(table, data).subscribe((data: any) => {
-        this.form.reset();
+        this.formValue.reset();
       });
     }
   }
 
   updateItem(table, data) {
-    if (this.form.valid) {
+    if (this.formValue.valid) {
       this.item = data;
       this.service
         .updateItemEntity(table, this.item.id, this.item)
         .subscribe((data) => {
-          this.form.reset();
+          this.formValue.reset();
           this.item = null;
         });
     }
+  }
+
+  get form() {
+    return this.formValue.controls;
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.formValue.reset();
   }
 }

@@ -1,9 +1,11 @@
 export class formCls {
     id: string;
+    title: string;
     firstName: string;
-    lastName: string;
-    phone: number;
+    lastName: string;    
     email: string;
+    password: string;
+    confirmPassword: string;
     date: Date;
-    active: number; // bool tiny int 
+    acceptTerms: number; 
 }
