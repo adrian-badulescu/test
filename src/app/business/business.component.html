@@ -1,7 +1,7 @@
 <div class="card m-3">
     <h5 class="card-header"></h5>
     <div class="card-body">
-        <form [formGroup]="formValue" (ngSubmit)="onSubmit()">
+        <form [formGroup]="formValue" (ngSubmit)="onSubmit(formValue.value)">
             <div class="form-group">
                 <input type="hidden" class="form-control" id="id" formControlName="id">
             </div>

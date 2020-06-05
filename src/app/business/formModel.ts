@@ -1,5 +1,5 @@
 export class formCls {
-    id: string;
+    id: number;
     title: string;
     firstName: string;
     lastName: string;    

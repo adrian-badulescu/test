@@ -12,14 +12,15 @@ import { matcher } from './matcher';
 })
 export class BusinessComponent implements OnInit {
   formValue: FormGroup;
-  item: formCls;
+  item: formCls = new formCls();
   list: Array<formCls>;
-  Active: Array<string> = ['Da', 'Nu'];
+  table: string = 'table_';
+  entity: string;
   submitted: boolean;
   id: number;
 
   private subscription: any;
-  table: string;
+
   constructor(
     private service: Service,
     public formBuilder: FormBuilder,
@@ -30,45 +31,54 @@ export class BusinessComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params) => {
       this.id = parseInt(params['id']);
+      console.log(this.id);
+      this.createTable(this.id, this.table);
     });
-    this.formValue = this.formBuilder.group({
-      id: [''],
-      title: ['', [Validators.required]],
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      acceptTerms: ['', Validators.required],
-      date: ['', [Validators.required]],
-    }, {
-      validator: matcher('password', 'confirmPassword')
-    });
+    this.formValue = this.formBuilder.group(
+      {
+        id: [''],
+        title: ['', [Validators.required]],
+        firstName: ['', [Validators.required, Validators.minLength(3)]],
+        lastName: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+        acceptTerms: ['', Validators.required],
+        date: ['', [Validators.required]],
+      },
+      {
+        validator: matcher('password', 'confirmPassword'),
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  onSubmit(table, values: formCls) {
+  onSubmit(values) {
+    console.log(values);   
     this.submitted = true;
-    values.id ? this.updateItem(table, values) : this.createItem(table, values);
-    console.log(values);
+    values.id ? this.updateItem(values) : this.createItem(values);
+    
   }
 
-  createItem(table, data) {
+  createItem(data) {
+    this.item = data;
+    this.item.id = this.id;
+    console.log(this.item.id);   
     if (this.formValue.valid) {
-      this.service._createItemEntity(table, data).subscribe((data: any) => {
+      this.service._createItemEntity(this.entity, this.item).subscribe((data: any) => {
         this.formValue.reset();
       });
     }
   }
 
-  updateItem(table, data) {
+  updateItem(data) {
     if (this.formValue.valid) {
       this.item = data;
       this.service
-        .updateItemEntity(table, this.item.id, this.item)
+        .updateItemEntity(this.entity, this.item.id, this.item)
         .subscribe((data) => {
           this.formValue.reset();
           this.item = null;
@@ -80,7 +90,11 @@ export class BusinessComponent implements OnInit {
     return this.formValue.controls;
   }
 
-  onReset() {
+  createTable(id: number, table: string): string {
+    return (this.entity = table.concat(id.toString()));
+  }
+
+  onReset(): void {
     this.submitted = false;
     this.formValue.reset();
   }
