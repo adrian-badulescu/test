@@ -101,6 +101,10 @@ export class BusinessComponent implements OnInit {
     return (this.entity = table.concat(id.toString()));
   }
 
+  delete(id) {
+    this.service.deleteItemEntity(this.entity, id).subscribe(res => console.log(res));
+  }
+
   goBack() {
     this.router.navigate(['/'])
   }

@@ -98,7 +98,7 @@
 
 
 
-<p-table [value]="list">
+<p-table *ngIf="!(list == null)" [value]="list">
     <ng-template pTemplate="header">
         <tr>
             <th>Titlu</th>
@@ -114,7 +114,8 @@
             <td>{{data.firstName}}</td>
             <td>{{data.lastName}}</td>
             <td>{{data.email}}</td>
-            <td>{{data.data}}</td>
+            <td>{{data.date}}</td>
+            <td><button class="btn btn-primary" (click)="delete(data.id)">Delete Item</button></td>
         </tr>
     </ng-template>
 </p-table>
