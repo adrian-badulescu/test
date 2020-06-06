@@ -35,7 +35,9 @@ export class BusinessComponent implements OnInit {
       this.createTable(this.id, this.table);
     });
 
-    // this.getItems(this.entity);
+    this.getItems(this.entity).subscribe(data => {
+      this.list = data;
+    });
 
     this.formValue = this.formBuilder.group(
       {
