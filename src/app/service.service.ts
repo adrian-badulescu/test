@@ -35,11 +35,12 @@ export class Service {
 
   
   public _createItemEntity(entity: string, item: object) {
+    console.log(item);
     return this.httpClient
       .post<any[]>(`${this.apiurl}/${entity}`, item, this.httpOptions)
       .pipe(
         tap((item: any[]) => console.log("added item")),
-        catchError(this.handleError<any>("create item"))
+        catchError(this.handleError<any>("create item")),        
       );
   }
 
@@ -87,7 +88,27 @@ export class Service {
   }
 
 
-
+  s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  guid() {
+    return (
+      this.s4() +
+      this.s4() +
+      "-" +
+      this.s4() +
+      "-" +
+      this.s4() +
+      "-" +
+      this.s4() +
+      "-" +
+      this.s4() +
+      this.s4() +
+      this.s4()
+    );
+  }
 
 
 

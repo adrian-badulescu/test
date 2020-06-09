@@ -17,7 +17,7 @@ export class BusinessComponent implements OnInit {
   table: string = 'table_';
   entity: string;
   submitted: boolean;
-  id: number;
+  id: string;
 
   private subscription: any;
 
@@ -30,12 +30,12 @@ export class BusinessComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params) => {
-      this.id = parseInt(params['id']);
-      console.log(this.id);
-      this.createTable(this.id, this.table);
+      this.createTable(params['id'], this.table);
     });
 
     this.getItems(this.entity).subscribe(data => {
+      console.log(this.entity);
+      console.log(data);
       this.list = data;
     });
 
@@ -74,8 +74,7 @@ export class BusinessComponent implements OnInit {
 
   createItem(data) {
     this.item = data;
-    this.item.id = this.id;
-    console.log(this.item.id);   
+    this.item.id = this.service.guid();    
     if (this.formValue.valid) {
       this.service._createItemEntity(this.entity, this.item).subscribe((data: any) => {
         this.formValue.reset();
@@ -99,7 +98,7 @@ export class BusinessComponent implements OnInit {
     return this.formValue.controls;
   }
 
-  createTable(id: number, table: string): string {
+  createTable(id: string, table: string): string {
     return (this.entity = table.concat(id.toString()));
   }
 

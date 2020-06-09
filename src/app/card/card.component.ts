@@ -19,6 +19,6 @@ export class CardComponent implements OnInit {
 
   goToBusiness(id) {
     this.service.defaultView = false;
-    this.router.navigate(['/business', id]);
+    this.router.navigate(['/business', id]);   
   }
 }
